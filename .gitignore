@@ -1,0 +1,10 @@
+# Local AWS CLI and editor artifacts
+.aws/
+.vscode/
+
+# Never commit credentials, private keys, or environment files
+*.pem
+*.key
+.env
+.env.*
+!.env.example
