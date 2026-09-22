@@ -1,0 +1,17 @@
+flowchart TB
+    User[Internet user] --> IGW[Internet Gateway]
+    subgraph VPC[My VPC: 10.0.0.0/16]
+        IGW --> RT[Public Route Table: 0.0.0.0/0 to Internet Gateway]
+        subgraph Public[Public 1: 10.0.1.0/24]
+            EC2[EC2 Web Server]
+        end
+        RT --> EC2
+        subgraph Private[Private database tier]
+            P1[Private 1: 10.0.2.0/24]
+            P2[Private 2: 10.0.3.0/24]
+            RDS[(Amazon RDS MySQL: myDB)]
+            P1 --- RDS
+            P2 --- RDS
+        end
+        EC2 -->|TCP 3306 from Web server security group| RDS
+    end
