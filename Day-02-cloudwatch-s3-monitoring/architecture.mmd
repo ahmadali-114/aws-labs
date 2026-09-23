@@ -1,0 +1,7 @@
+flowchart LR
+    EC2[EC2 via Session Manager] -->|ListObjects| S3[Amazon S3 bucket]
+    S3 --> CW[CloudWatch request metrics]
+    CW --> Dashboard[s3-dashboard]
+    CW --> Alarm[ListRequests threshold alarm]
+    Alarm --> SNS[Amazon SNS]
+    SNS --> Email[Email notification]
